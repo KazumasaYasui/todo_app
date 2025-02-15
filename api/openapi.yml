@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: TODO API
+  version: 1.0.0
+servers:
+  - url: /api/backend/
+paths:
+  /tasks:
+    get:
+      summary: タスク一覧の取得
+      operationId: getTasks
+      responses:
+        "200":
+          description: 成功時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+    post:
+      summary: タスクの作成
+      operationId: createTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTask"
+      responses:
+        "201":
+          description: 作成成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Buy groceries"
+        completed:
+          type: boolean
+          example: false
+    CreateTask:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Buy groceries"
+        completed:
+          type: boolean
+          example: false
